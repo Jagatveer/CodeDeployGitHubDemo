@@ -2,10 +2,25 @@ language: ruby
 rvm:
 - 2.1.2
 deploy:
-  provider: codedeploy
-  access_key_id: "YOUR AWS ACCESS KEY"
-  secret_access_key: "YOUR AWS SECRET KEY"
-  bucket: "S3 Bucket"
-  key: latest/MyApp.zip
-  application: MyApp
-  deployment_group: MyDeploymentGroup
+- provider: s3
+  access_key_id: AKIAJ2W67PFHEGNE4U4A
+  secret_access_key: &70358888429380
+    secure: edMMZGr/OrNbmC3cdBey7RQuTCG9hq4V59pI8vL+wZ8TXElZevreTbeOEXswJrOyyraZQIsrfhwnPyQZqCxh8l0BA5BnMTlqrGCoqtFYoXXKmPmfqjE+5sreb0+bjHsRgWCZOs9oiLt6Q/X8H6hSOG+Rm7nyF9sNYzATC5ipbaivS0Vl15Ss9FB4Qpn2aUmvZc1R2M7dmx8OfgIpeeumKjKiOXjsKSyhKpbeX3fBTPVcC1RiX80QYivHGpwL3qwxE1tqTiMEr7G1OfAqUiGmvPPHaanXp1Cx4m6GJsF/9DS9SyXXz1PIR+fiaoa2VqL7aQKrt7eeCoAsewHDreU4kA3LEAUzhgcOp2vxtIZumq+Wi0UFUmnssPggqfk3vxz1/2KGa1RTPjq02nidTarb3WLniDkJLQiW2lZiHG2uffo875HGuQZ7SMgl1eRf68S/Pu/fXas1RfGIJLuJJzmIHGHHDV/l1cwX+sAe/ToTqeAJ3fJriwJrqnwUHSIf/5YCTN/P1uVh5VIL8Dsfqfa/oaRumILDCqrFt+SJ7rRVYPlslzQCLnXqMWCSUS4ZF5MCUUvZMGjiYAxBoMvU+9/+4DWuO3HuBI7OdWx6Qm7KJsfthaGcf8YVKXgvujprrbjGy13UVG1Npz8Ghju7ddhiHsfriS+1AWAfblIZlYXWHnQ=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &70358888380760
+    repo: jagatveer/CodeDeployGitHubDemo
+  bucket: s3://aws-codedeploy-us-west-2
+  upload_dir: samples/latest
+- provider: codedeploy
+  access_key_id: AKIAJ2W67PFHEGNE4U4A
+  secret_access_key: *70358888429380
+  bucket: s3://aws-codedeploy-us-west-2
+  key: samples/latest/SampleApp_Linux.zip
+  bundle_type: zip
+  application: CodeDeployGitHubDemo
+  deployment_group: CodeDeployGitHubDemo-Ops-587
+  on: *70358888380760
+before_deploy:
+- mkdir -p dpl_cd_upload
+- mv SampleApp_Linux.zip dpl_cd_upload/SampleApp_Linux.zip
