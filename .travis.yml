@@ -4,23 +4,22 @@ rvm:
 deploy:
 - provider: s3
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: &70358888429380
-    secure: edMMZGr/OrNbmC3cdBey7RQuTCG9hq4V59pI8vL+wZ8TXElZevreTbeOEXswJrOyyraZQIsrfhwnPyQZqCxh8l0BA5BnMTlqrGCoqtFYoXXKmPmfqjE+5sreb0+bjHsRgWCZOs9oiLt6Q/X8H6hSOG+Rm7nyF9sNYzATC5ipbaivS0Vl15Ss9FB4Qpn2aUmvZc1R2M7dmx8OfgIpeeumKjKiOXjsKSyhKpbeX3fBTPVcC1RiX80QYivHGpwL3qwxE1tqTiMEr7G1OfAqUiGmvPPHaanXp1Cx4m6GJsF/9DS9SyXXz1PIR+fiaoa2VqL7aQKrt7eeCoAsewHDreU4kA3LEAUzhgcOp2vxtIZumq+Wi0UFUmnssPggqfk3vxz1/2KGa1RTPjq02nidTarb3WLniDkJLQiW2lZiHG2uffo875HGuQZ7SMgl1eRf68S/Pu/fXas1RfGIJLuJJzmIHGHHDV/l1cwX+sAe/ToTqeAJ3fJriwJrqnwUHSIf/5YCTN/P1uVh5VIL8Dsfqfa/oaRumILDCqrFt+SJ7rRVYPlslzQCLnXqMWCSUS4ZF5MCUUvZMGjiYAxBoMvU+9/+4DWuO3HuBI7OdWx6Qm7KJsfthaGcf8YVKXgvujprrbjGy13UVG1Npz8Ghju7ddhiHsfriS+1AWAfblIZlYXWHnQ=
+  secret_access_key: &70123290268840
+    secure: NcOBerahBf4RBAQeO5XyCYRQGK20Ey2b7xkrPlkI4qoZPlmA4T69Ie9WDTJs401ulzLOyk3zLq6MlC4EKhErhmDM13TGpmdFdciR+PM11FGoWjdFvOURIqEcr77zcxigjK2J8Is+gFwZ3gBQso6tgpri44V9pefsUZ3qjSsQEiwwyZDGlkS9jQ3fwlFUl+Qe2LYrZsrS0xw2m1wBAi867FZVDj956RMrcadTczvSdko7ULPzEjki3Rusz3/anaJv+bBxKRxk1qIn1ajMGixVxUCEhQRIaUDah3CzgWc23jWGiZXD7zNHNUos6NybPkxIZ+uYpe7Ti07RB44d4vCNJsXyTq4inlZDLBploBFr4TdFjRJ5zHsvHmyqth1Us3k0/2N/wdNzVZuIV4siJoIpZ6D2grWWvAxBb58uv6ky3GWf+eX37KfBpgSVifFycE/ohXJzMdFeEG+asLKKtfT4b6Jzvb01fBNY5UTcA+VcZ7XEV+x3vLtqC++94guOHAdA7Vm3FBLcD0W+Uvz2sHMujHwhqVkq34Wz9io4BsXeUzzMlx09gU9v95xTyIrC578jt8F8VrDRAjwtj/oOTuhkpQaFum4KgCIX7GJSuZPGo9/qIsAtMf6KBzVTXn4P7zanU/lnTihSJp2MRL2u1hzypEnQnzQPMOHetp07TrdQjWE=
   local_dir: dpl_cd_upload
   skip_cleanup: true
-  on: &70358888380760
+  on: &70123290101220
     repo: jagatveer/CodeDeployGitHubDemo
-  bucket: s3://aws-codedeploy-us-west-2
-  upload_dir: samples/latest
+  bucket: s3://ops-587
 - provider: codedeploy
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: *70358888429380
-  bucket: s3://aws-codedeploy-us-west-2
-  key: samples/latest/SampleApp_Linux.zip
+  secret_access_key: *70123290268840
+  bucket: s3://ops-587
+  key: ''
   bundle_type: zip
-  application: CodeDeployGitHubDemo
+  application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
-  on: *70358888380760
+  on: *70123290101220
 before_deploy:
 - mkdir -p dpl_cd_upload
-- mv SampleApp_Linux.zip dpl_cd_upload/SampleApp_Linux.zip
+- mv SampleApp_Linux.zip dpl_cd_upload/''
