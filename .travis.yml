@@ -6,6 +6,6 @@ deploy:
   bucket: s3://ops-587
   local-dir: ./ 
   upload-dir: sample
-  acl: bucket_owner_full_control
+  acl: public_read_write 
   on:
     repo: jagatveer/CodeDeployGitHubDemo
