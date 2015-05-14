@@ -15,7 +15,7 @@ deploy:
   access_key_id: AKIAJ2W67PFHEGNE4U4A
   secret_access_key: *70123290268840
   bucket: s3://ops-587
-  key: ''
+  key: 'sample/SampleApp_Linux.zip'
   bundle_type: zip
   application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
