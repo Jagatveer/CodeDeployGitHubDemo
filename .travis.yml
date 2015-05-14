@@ -3,7 +3,7 @@ deploy:
   access_key_id: AKIAJ2W67PFHEGNE4U4A
   secret_access_key:
     secure: QaJhyIgv1Nb/d3UOX31pMnx3fLJuke7LeCp0fzbfGDmwuVgtrvX/DuV++Bt1BnGcdRYE8rvBR4FuvSphJnEOQy7YyGzKaywWXQ5izY0aml/oyjc7gk/TlB1a38olb7SKVNqaJ8gdpQhpecfJ0caplOfMYdqvKUtN0LJA9djdx50oarG4ZYGG/QKt2N2BhW+9gEppLp3y5Y2hBXKEpDkYOdTKMYMZtC/DAoD5Xln4Gi5GZeVutxy6tILZvIlTizn56Jy3nU+Slx9TDGAjrppmCyCTdRAtgoLhIavEAO8CZwttbIWf0S8SbHyyKPQnT1TAPyz2loSoslAgbX0bCJM9FK2ygpbns9g7a49bPZe6bqcx0UGwMeVqupWuuTjm2H+qBprru6p1BHmMoVLsYcM/M1YIopAGZ6Ao4xgWfgLphzEceBHgA+z3kwd8x3pXSmdut034ai4qKVfLlmHGm4BqjjZo81YOQMwcW4vOAWWEo+yUa+fykEIq/IeLGrPWCEvk2vMBNsz920gWgARvvfEVZz1aU5duelamdiUyAAcfB8UxszW0BmyyR5xfEt3QQJ8oX+fbZWfWFSz5sBTHXDXvISCf6acpNbGmBGhCKrrX/leJrNUeBO2B9L4NlwPygv++9UK7xaqrgTb+B54wt++4kvNup5H7c5uULjV4KZLr/OA=
-  bucket: s3://ops-587/sample
+  bucket: s3://ops-587
   local-dir: ./ 
   upload-dir: sample
   acl: bucket_owner_full_control
