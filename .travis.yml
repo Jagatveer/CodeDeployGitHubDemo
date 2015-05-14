@@ -14,6 +14,7 @@ deploy:
   secret_access_key: *70278693946380
   bucket: s3://ops-587
   key: sample/SampleApp_Linux.zip
+  revision_type: github
   bundle_type: zip
   application: OPS-587
   deployment_group: OPS-587
