@@ -3,8 +3,8 @@ deploy:
   access_key_id: AKIAJ2W67PFHEGNE4U4A
   secret_access_key:
     secure: bSSQfRSzeZpH7y3tb8qnKjSCsQJS6ondcyXMdQXOqrQExFAhhszrqVVHvGnikru/9spIkg2JOF0yH4mk5BA7nRoDpkpd27FyuHAbMYr4XIImipBpdYDdV79EgwBJp9hAmZwzWajdQKP0N/+kwRnL90pQ/ZqxgjRH/iZnkxUwGMGIN+Jmgw9Pl3MkUCagJWMuDpJB6VaTCRzYHngG70NRxglvewP7WaWKSYOTPsbJQSe0UBn/JaKxSfr5sv/6db+iGyfBife0neyITi4dVx4YcJZsSIOeZK4tv5tHCQdlcRXctxF/zwAPQR7dWLQR29SrO9SKsNZuY8qWhP09idRLN2fFTPoSKzAny9B08FSgh0zLUgbJR9AdLJwkH6nVJGrT68fp0if6Z54YgFQZrK95f7Y8Iwzl7LXnTYjv/y1Igj7NJJowYriuoBzw90yQGZpH76Zb/IylebPdi038Tt2WyGHarD3M7IF96CxiHQx7Sy7zGwc3ukqiZ/sfomokv+HDzjRUKBoAx5O68yRPLWrfEuSyPSwUquQ9cwGeZEowp91gCtZzNj2V7uO89cH+GoKbUTuJo/ysgBwi4oPdpMIsSiTDKyVTtCkKfdSmeIA6oF4IBuJCGS3cizfrc2z+RxvbP9MiiUHXsTkhMR2JaFNsqsR68C8sGUloJOaXTLT+RPY=
-  bucket: s3://ops-587
-  key: sample/SampleApp_Linux.zip
+  bucket: s3://ops-587/sample
+  key: 
   bundle_type: zip
   application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
