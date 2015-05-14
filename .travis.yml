@@ -14,5 +14,5 @@ deploy:
   bucket: s3://ops-587
   key: sample/SampleApp_Linux.zip
   bundle_type: zip
-  application: CodeDeployGitHubDemo-Ops-587
-  deployment_group: CodeDeployGitHubDemo-Ops-587
+  application: OPS-587
+  deployment_group: OPS-587
