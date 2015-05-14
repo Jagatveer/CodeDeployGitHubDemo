@@ -1,72 +1,95 @@
-#
-# Rakefile for Chef Server Repository
-#
-# Author:: Adam Jacob (<adam@opscode.com>)
-# Copyright:: Copyright (c) 2008 Opscode, Inc.
-# License:: Apache License, Version 2.0
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
 require 'rubygems'
-require 'chef'
-require 'json'
-
-# Load constants from rake config file.
-require File.join(File.dirname(__FILE__), 'config', 'rake')
-
-# Detect the version control system and assign to $vcs. Used by the update
-# task in chef_repo.rake (below). The install task calls update, so this
-# is run whenever the repo is installed.
-#
-# Comment out these lines to skip the update.
-
-if File.directory?(File.join(TOPDIR, ".svn"))
-  $vcs = :svn
-elsif File.directory?(File.join(TOPDIR, ".git"))
-  $vcs = :git
+%w[maruku erubis].each do |dep|
+  require dep rescue puts "Stat requires the #{dep} Gem. `gem install #{dep}` to continue..." and exit
 end
 
-# Load common, useful tasks from Chef.
-# rake -T to see the tasks this loads.
+ENV['STAT_REMOTE'] = "deployer@mulva:/var/www/test"
 
-load 'chef/tasks/chef_repo.rake'
-
-desc "Bundle a single cookbook for distribution"
-task :bundle_cookbook => [ :metadata ]
-task :bundle_cookbook, :cookbook do |t, args|
-  tarball_name = "#{args.cookbook}.tar.gz"
-  temp_dir = File.join(Dir.tmpdir, "chef-upload-cookbooks")
-  temp_cookbook_dir = File.join(temp_dir, args.cookbook)
-  tarball_dir = File.join(TOPDIR, "pkgs")
-  FileUtils.mkdir_p(tarball_dir)
-  FileUtils.mkdir(temp_dir)
-  FileUtils.mkdir(temp_cookbook_dir)
-
-  child_folders = [ "cookbooks/#{args.cookbook}", "site-cookbooks/#{args.cookbook}" ]
-  child_folders.each do |folder|
-    file_path = File.join(TOPDIR, folder, ".")
-    FileUtils.cp_r(file_path, temp_cookbook_dir) if File.directory?(file_path)
+task :default => "stat:get_started"
+namespace :stat do
+  desc "Get Started!"
+  task :get_started do
+    mkdir_p "src/stylesheets"
+    mkdir_p "src/images"
+    mkdir_p "src/javascripts"
+    md,html = File.read(__FILE__).split(/^__END__$/)[1].split(/^=+$/).map {|s| s.strip}
+    File.open('src/layout.html.erb', 'w') { |f| f.puts html }
+    File.open('src/readme.md', 'w') { |f| f.puts md }
+    Rake::Task["stat:build"].invoke
   end
-
-  system("tar", "-C", temp_dir, "-cvzf", File.join(tarball_dir, tarball_name), "#{args.cookbook}")
-
-  FileUtils.rm_rf temp_dir
+  
+  task :initialize do
+    mkdir_p "pkg"
+  end
+  
+  FileList['src/*.md'].each do |src|
+    output = src.sub(/src\/(.+).md/, 'pkg/\1.html')
+    action = $1
+    layout = "src/layout.html.erb"
+    file output => [src, layout] do
+      content = Maruku.new(File.read(src)).to_html
+      built = Erubis::Eruby.new(File.read(layout)).evaluate({:content => content, :action => action})
+      File.open(output, 'w') { |f| f.puts built }
+    end
+    task :build => [:initialize, output]
+  end
+  
+  FileList['src/stylesheets/*', 'src/images/*', 'src/javascripts/*'].each do |src|
+    output = src.sub(/^src/,'pkg')
+    file output => src do
+      mkdir_p 'pkg/'+src.split('/')[1]
+      cp src, output
+    end
+    task :build => [:initialize, output]
+  end
+  
+  desc "Build the site"
+  task :build
+  
+  desc "Force a full rebuild"
+  task :rebuild => [:clean, :build]
+  
+  desc "Clean the pkg directory"
+  task :clean do
+    rm_rf "pkg"
+  end
+  
+  desc "Build & Rsync to the configured host"
+  task :deploy => :build do
+    puts ENV['STAT_REMOTE'] ? `rsync -avz -e ssh pkg/ #{ENV['STAT_REMOTE']}` : "Usage: rake stat:deploy STAT_REMOTE=user@host:path"
+  end
 end
 
-#begin
-#  require 'kitchen/rake_tasks'
-#  Kitchen::RakeTasks.new
-#rescue LoadError
-#  puts ">>>>> Kitchen gem not loaded, omitting tasks" unless ENV['CI']
-#end
+__END__
+## Stat ##
+The joy of simple static site maintenance made super easy.
+
+Hopefully you've already run `rake stat:get_started` from the directory containing the Rakefile, if not, go for it!  The idea is simple.  Define the content of your web pages using markdown, and slap a common layout around them.  Only rebuilding or uploading files when neccesary.  
+
+From within `src/layout.html.erb` you have access to two variables, `@content` and `@action`.  `@content` is what was generated for any given `*.md` file in your src directory and `@action` is the `*` part of the `*.md` file _use this for adding a class to navigation links, see `src/layout.html.erb`_.  Set the constant at the top of the Rakefile to the appropriate value if you intend to rsync the generated html somewhere.
+
+Happy Stating!
+
+=======================================
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" href="stylesheets/screen.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<title>Stat</title>
+</head>
+<body>
+  <div id="header">
+    <ul id="menu">
+      <%- ["readme", "noexist"].each do |a| -%>
+        <%= "<li><a href='#{a}.html' class='#{'cur' if @action == a}'>#{a.capitalize}</a></li>" %>
+      <%- end -%>
+    </ul>
+  </div>
+  <div id="content">
+  	<%= @content %>
+  </div>
+</body>
+</html>
