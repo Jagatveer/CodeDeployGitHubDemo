@@ -1,6 +1,3 @@
-language: ruby
-rvm:
-- 2.1.2
 deploy:
 - provider: s3
   access_key_id: AKIAJ2W67PFHEGNE4U4A
