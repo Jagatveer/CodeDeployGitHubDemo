@@ -1,11 +1,22 @@
 deploy:
-  provider: s3
+- provider: s3
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key:
-    secure: QaJhyIgv1Nb/d3UOX31pMnx3fLJuke7LeCp0fzbfGDmwuVgtrvX/DuV++Bt1BnGcdRYE8rvBR4FuvSphJnEOQy7YyGzKaywWXQ5izY0aml/oyjc7gk/TlB1a38olb7SKVNqaJ8gdpQhpecfJ0caplOfMYdqvKUtN0LJA9djdx50oarG4ZYGG/QKt2N2BhW+9gEppLp3y5Y2hBXKEpDkYOdTKMYMZtC/DAoD5Xln4Gi5GZeVutxy6tILZvIlTizn56Jy3nU+Slx9TDGAjrppmCyCTdRAtgoLhIavEAO8CZwttbIWf0S8SbHyyKPQnT1TAPyz2loSoslAgbX0bCJM9FK2ygpbns9g7a49bPZe6bqcx0UGwMeVqupWuuTjm2H+qBprru6p1BHmMoVLsYcM/M1YIopAGZ6Ao4xgWfgLphzEceBHgA+z3kwd8x3pXSmdut034ai4qKVfLlmHGm4BqjjZo81YOQMwcW4vOAWWEo+yUa+fykEIq/IeLGrPWCEvk2vMBNsz920gWgARvvfEVZz1aU5duelamdiUyAAcfB8UxszW0BmyyR5xfEt3QQJ8oX+fbZWfWFSz5sBTHXDXvISCf6acpNbGmBGhCKrrX/leJrNUeBO2B9L4NlwPygv++9UK7xaqrgTb+B54wt++4kvNup5H7c5uULjV4KZLr/OA=
-  bucket: s3://ops-587
-  local-dir: ./ 
-  upload-dir: sample
-  acl: public_read_write 
-  on:
+  secret_access_key: &70159852348700
+    secure: msh0d0XtnS5TrwjtGGLdupdjC6RsCuKpMzaGLLHkekcMVWieFOFWiOrQToYlaMwHaaSwFPgyMxG6wjZHkbTP7QQ8NUGzmGs/0sgI4yKWf4TZiZZJ2413KfODRkNMZMPYyvLIGNhQgzW1DZLXQMU+LO6B2y86A92NH+j961ZeK9ly8uiAPVIpr5PL4HPovPx5/6XN5G+3NFhmP7ksgosI88M3LZ5dEYsHV4VXdIJ5jnWjDcnRyrL6KtSwxluHLcTbqGH+6h080lzUNmi8IJlPz9m36IkWm4WuW3DU4aaUOJlnX5My/UtqEUgJkAbyYOho0kj0Yu99VIF476h+Cq5lRJjp+A0IbmC0f+t8Jjq3gbMBjb+ECUW7tddhqoBWshyzSWIMtF91oAdJ/C0gbMorCFLO3GN3bFEHxPSlc3lITsWH4ASWxzPT3+JGf+cb/IpCG0lbWdtKz/Rp9xWn9ZOxJgpIeTopCLc3+pefwLGD/0mQ8GR9DImQBCQS+3gt94ULKbz9dl+/Y6eZ4y/oUxrogkQoQJQ2tJNkNVPWkfoEYyHROzY68lWRhF6tbbfW4UQEeO8kf9gHWQth+5qjPYOR5aNOFlLbuUgPBvyeFkBdRZyEJbvt4f+ChLVkWSPLuJ/u6td2xbq9oIFpmsKsNbltpfPoybTkKPEaykDcpJMoDwk=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &70159856443620
     repo: jagatveer/CodeDeployGitHubDemo
+  bucket: ops-587
+- provider: codedeploy
+  access_key_id: AKIAJ2W67PFHEGNE4U4A
+  secret_access_key: *70159852348700
+  bucket: ops-587
+  key: sample
+  bundle_type: zip
+  application: CodeDeployGitHubDemo-Ops-587
+  deployment_group: CodeDeployGitHubDemo-Ops-587
+  on: *70159856443620
+before_deploy:
+- mkdir -p dpl_cd_upload
+- mv index.html dpl_cd_upload/sample
