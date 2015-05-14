@@ -16,4 +16,3 @@ deploy:
   bundle_type: zip
   application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
-  on: *70123290101220
