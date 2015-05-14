@@ -6,6 +6,7 @@ task :default => "stat:get_started"
 namespace :stat do
   desc "Get Started!"
   task :get_started do
+    mkdir_p "dpl_cd_upload"  
     mkdir_p "src/stylesheets"
     mkdir_p "src/images"
     mkdir_p "src/javascripts"
