@@ -1,18 +1,21 @@
 deploy:
 - provider: s3
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: &70123290268840
-    secure: NcOBerahBf4RBAQeO5XyCYRQGK20Ey2b7xkrPlkI4qoZPlmA4T69Ie9WDTJs401ulzLOyk3zLq6MlC4EKhErhmDM13TGpmdFdciR+PM11FGoWjdFvOURIqEcr77zcxigjK2J8Is+gFwZ3gBQso6tgpri44V9pefsUZ3qjSsQEiwwyZDGlkS9jQ3fwlFUl+Qe2LYrZsrS0xw2m1wBAi867FZVDj956RMrcadTczvSdko7ULPzEjki3Rusz3/anaJv+bBxKRxk1qIn1ajMGixVxUCEhQRIaUDah3CzgWc23jWGiZXD7zNHNUos6NybPkxIZ+uYpe7Ti07RB44d4vCNJsXyTq4inlZDLBploBFr4TdFjRJ5zHsvHmyqth1Us3k0/2N/wdNzVZuIV4siJoIpZ6D2grWWvAxBb58uv6ky3GWf+eX37KfBpgSVifFycE/ohXJzMdFeEG+asLKKtfT4b6Jzvb01fBNY5UTcA+VcZ7XEV+x3vLtqC++94guOHAdA7Vm3FBLcD0W+Uvz2sHMujHwhqVkq34Wz9io4BsXeUzzMlx09gU9v95xTyIrC578jt8F8VrDRAjwtj/oOTuhkpQaFum4KgCIX7GJSuZPGo9/qIsAtMf6KBzVTXn4P7zanU/lnTihSJp2MRL2u1hzypEnQnzQPMOHetp07TrdQjWE=
+  secret_access_key: &70141539677180
+    secure: Ip68NSNCyF4GvGtER1JWKXKMLQO0rCDsA1UOdWkq13QXKBfpC4IUecQ8KBXC40IE2Qmced9vktIFrERBRCNVikxHPOZSakA3S+Nun8/U4SkTqCGY9jOWpiiQM72le5Gu5q2DBYT1VUcuUpz5+oqZXvQzcxyY3RXJFZu5MtiVfLNQ6sw3ckEqVoGGhCFVLDDrFPFcXhyGRT+bFQF21CuzGIr4UVrnUySTeYGhPN/ucrDG/JE6Kgb+kATst8zeANttCcYP3uf+GxOzFfNnljEg2tIvFYAYUxicFqSWM6nfQ0zf6uDsXxUVBLlfBnItRPZ16BxXi1QsBY8MBpRMPtRqJ11obkZ4drrNSvkIivlBiodF/k6A1/NBG0rnjVcdwbR4JLXaeOKavvlSGsSXYmKxpMe55rqd8ysqvyL5yhKhmPukLsggcyo/T07mGB3xzYx5fbc/QI1j4kC4xGgnbovKOkFzDad1nGGX9iK1/JF1CEnBKADc7akL/6SNVUPYkAEacx7WzLKbpWdVqWxgyygCG8YTKX0loCVRwbaFdfCt6bFjX/5VMlbo4jVJublL+4aaLXxU9Nu7j3uN/Q1dDOJP1Dw5ExYImsX65jxQ1AHGost3di/oE512NBTIX0vMbtDSJf+MY1NQKKjUl5Ljf6mv0vvUcLHMxo7AEADw4lJd7ss=
   local_dir: dpl_cd_upload
   skip_cleanup: true
-  on: &70123290101220
-    repo: jagatveer/CodeDeployGitHubDemo
+  on: 
   bucket: s3://ops-587
+  upload_dir: sample
 - provider: codedeploy
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: *70123290268840
+  secret_access_key: *70141539677180
   bucket: s3://ops-587
-  key: 'sample/SampleApp_Linux.zip'
+  key: sample/SampleApp_Linux.zip
   bundle_type: zip
   application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
+before_deploy:
+- mkdir -p dpl_cd_upload
+- mv SampleApp_Linux.zip dpl_cd_upload/SampleApp_Linux.zip
