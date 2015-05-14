@@ -17,6 +17,3 @@ deploy:
   application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
   on: *70123290101220
-before_deploy:
-- mkdir -p dpl_cd_upload
-- mv SampleApp_Linux.zip dpl_cd_upload/''
