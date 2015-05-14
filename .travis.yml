@@ -1,20 +1,12 @@
 deploy:
-- provider: s3
+  provider: codedeploy
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: &70278693946380
-    secure: Qw7zx3YGPWE/wjwRVGwNyh74TWSTutRxdEjWEtah7IUeJE9uFyYSKR2Mm1om3bGxBOca55GhX8tzTmiE/84dHfv63T00XWsapKtQ8tm//BxyY8iT+Y6d7dmgrVT6SntySSZqtFcnvOpqO0wRDg/yG2uvKK8bFFpgJHkJWoa9DbsBg3iTD79bQa8wytt9UES8p4X2B2gGqU3OtiuDnXWmCYfmyfFj5U3JaDqNyVgyKkJJMM8tO7JbV+1H25X1Qf3RmTnybksElB7Mq0xy4kB/rQ0sHuPtbkn5npZeKWNDtQGSg2x7+1WGaRR2vBpEeAolmhqsfK5TexyV8ghkZ6c5ojOtl7woztBPLU4dbfEryePKeQFHEj2GO7q7Pbvnb/PjicQk3T1U2r/F7OPks7jY3xlkLfmHZZ5PPqPyt74EseRw1VsrWzQAXvqdfjQ1imYdL+IZPGgekx84DLINIwHa2hAdWsU8tRm2Ip2qLLOmO8wvN7va+sLMnip7Gxa2C5TASi5in2c/nJQZfQPP+kolZ7y7053V0CjG8UwcWTz3nvjHfZ8wb92WH2lT/Z9V1fC2dn07O7Dh8WHZiI64IJ61CW8ko/uqPLUQpdiw80rNdVPxYW81KYyrXJwECNSaPF9I4AOl1JPy0qAL+ayJaZAGr6W2ChSCixBoBfug0na7ZJg=
-  local_dir: dpl_cd_upload
-  skip_cleanup: true
-  on: &70278693954260
-    repo: jagatveer/CodeDeployGitHubDemo
-  bucket: s3://ops-587
-  upload_dir: sample
-- provider: codedeploy
-  access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: *70278693946380
+  secret_access_key:
+    secure: bSSQfRSzeZpH7y3tb8qnKjSCsQJS6ondcyXMdQXOqrQExFAhhszrqVVHvGnikru/9spIkg2JOF0yH4mk5BA7nRoDpkpd27FyuHAbMYr4XIImipBpdYDdV79EgwBJp9hAmZwzWajdQKP0N/+kwRnL90pQ/ZqxgjRH/iZnkxUwGMGIN+Jmgw9Pl3MkUCagJWMuDpJB6VaTCRzYHngG70NRxglvewP7WaWKSYOTPsbJQSe0UBn/JaKxSfr5sv/6db+iGyfBife0neyITi4dVx4YcJZsSIOeZK4tv5tHCQdlcRXctxF/zwAPQR7dWLQR29SrO9SKsNZuY8qWhP09idRLN2fFTPoSKzAny9B08FSgh0zLUgbJR9AdLJwkH6nVJGrT68fp0if6Z54YgFQZrK95f7Y8Iwzl7LXnTYjv/y1Igj7NJJowYriuoBzw90yQGZpH76Zb/IylebPdi038Tt2WyGHarD3M7IF96CxiHQx7Sy7zGwc3ukqiZ/sfomokv+HDzjRUKBoAx5O68yRPLWrfEuSyPSwUquQ9cwGeZEowp91gCtZzNj2V7uO89cH+GoKbUTuJo/ysgBwi4oPdpMIsSiTDKyVTtCkKfdSmeIA6oF4IBuJCGS3cizfrc2z+RxvbP9MiiUHXsTkhMR2JaFNsqsR68C8sGUloJOaXTLT+RPY=
   bucket: s3://ops-587
   key: sample/SampleApp_Linux.zip
   bundle_type: zip
-  application: OPS-587
-  deployment_group: OPS-587
-  on: *70278693954260
+  application: CodeDeployGitHubDemo-Ops-587
+  deployment_group: CodeDeployGitHubDemo-Ops-587
+  on:
+    repo: jagatveer/CodeDeployGitHubDemo
