@@ -1,22 +1,14 @@
 deploy:
-- provider: s3
+  provider: s3
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: &70309768835860
-    secure: oFQjdDqbMViea6b6yoPILnYTtD5b8c7bdWanj4n5dBGDAoTGLXdY0Uf10sxCr5CpIjCWVAjBeRZqy9mMdHWCMhV2qTmTpImIPEkKdNUcwlvGqZDXD9RG529c2eY2Dz5KupE7f0TCwfE++B62xb5ZCz7KcNZ+KZDaIwI0rgbCEWX2yDSfL7x3LuK49gbryN+ilNu1CUsaygWLN8Xu9cEpvCFaz+coZX6x6aHsulC9bOa7ND63dGvVkKC7jzPPipMV+I5Z9EZXHcm+lTsmmYlvHCsQt720YkmUGUC64HX54GlHXxSIc/aHCARIS66OZhFpHgjxySBt1ERNLMQpLGBG6MocN76F1lvLHTePHOamDScAm7xrNnWg2nke3oWFweFTQWX82iC3tDDC3SMHwC+manTcwSLq5EHQkToLi0G1bmqFNeCmHNueEt/PDWlzrqPGQV3kb3y1JDb5It7Kj79UxA7l2846tRIHN3L3KGMnoS6ws75HqTFZptG3iHe+QnxMHBAXdw995HRyYYjXy+gDj+I4azFzcwOzXMA253dqwXU3kYSzWb8/dWbG3cjp707YPGGuTqzA1jq4j+y0/N1EVFb9qY/lbLFoT9npLBQiie6PmafEGQYt0G+Ng4dktIzbXt9cSckiYAq0u3Kq1XCMiyoUvjZufZOVSdk8uSTLA1Y=
-  local_dir: dpl_cd_upload
-  skip_cleanup: true
-  on: &70309768855300
-    repo: jagatveer/CodeDeployGitHubDemo
-  bucket: "ops-587"
-  region: "us-west-2"
-  endpoint: "s3-website-us-west-2.amazonaws.com"
-  upload_dir: sample
-- provider: codedeploy
-  access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: *70309768835860
+  secret_access_key:
+    secure: L810IyU2Ibky3vLX0/rr1aAMNCI2SLsRfYPJWc7O2TVOUjhdrlH4VC7RMVX+Q4bkm+zByUHPWHA80Nd8dfT7mm1XCSXeVVAu1alQyr1baJi4AOB3gZ6pjqDYAsWQl1X2KXuJomH1kEh2BvJWsl90anooL/fUAHt+pfYYWwkaLsXmTZZjOJAtiSa2JugGABEs94bm0ltAP5N+qudbGCAl/iiXVfitqnAZL12ytz/f26UfTD0GPF/snCXHKK4wwbV5C0BYwH2rckK4t8335+1Ppfg0ZgBRHqlYtKUE3qaECcQ1XitbbxGrPEscbUY0N9Gt9rvdQ7C7Vrl9+UWdxDVLjtiEEwqir21YjUmClCJKVdAnmLYDBIZufwuQXo5PMPaxFr+tAw977zdWrHs/Wjj6p+Av2WHNJnD3YT5uV/RUVGLgo4H0NMWE3rdP3IaLQaKdlo8yginbDuiRs/Xp8TInoAoZpr06+56OIA2w34pBAIuY0rWIOgHIyvO69cIgUYrgDM+eUlzjIKUhJyOl528NyKULMgNhpfA4ry6xDzlj2aGcwbrn9Kv68aYRa2nE4nFJZpMGxGVEphfFZeHL5hnIosI9QVd2wLGpeN2m73K6WH/aiHGaY+RZqamYLxy0h6H0Xs0wBV8/CZq5jKv2TK6SFCaKwY2HVjM7DXD8GtNckYs=
   bucket: ops-587
-  key: sample/CodeDeployGitHubDemo-Ops-587.zip
-  bundle_type: zip
-  application: CodeDeployGitHubDemo-Ops-587
-  deployment_group: CodeDeployGitHubDemo-Ops-587
-  on: *70309768855300
+  endpoint: "s3-website-us-west-2.amazonaws.com"
+  region: "us-west-2"
+  skip_cleanup: true
+  local-dir: /Users/kayako/Documents/GitHub-Personal/CodeDeployGitHubDemo
+  upload-dir: sample
+  acl: public_read_write
+  on:
+    repo: jagatveer/CodeDeployGitHubDemo
