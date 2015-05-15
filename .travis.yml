@@ -1,12 +1,24 @@
 deploy:
-  provider: codedeploy
+- provider: s3
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key:
-    secure: BR3sG0/uqXecDcESg9re24C0wNueCHmYsiAZaP+9GoyGbbgzIfMg0N7BlSWCRyYB0YGJuQiSD1LfisbQShFQXMfS4U7HrJm6ta8VvDbXyvkseKUPQHK+Lg1mO3iIXfJCHQScgGBePhispT7S2Tw6Xvkjs/cog+ROO8Mzp2eZuO45CE9Xq6j8hnN9lldHL12L6nnJ6oHm5sAa+CX4pjsz8mez1QXmkz7gW+VMcVTI2p4e5jWf7DV0ql2LyV0DYJz0rMWip50lzVhsiw8hDt2oQXeudQISCW/BWz/f4uS+CO/scBZOpCb9Mn3dXALT5wmLoEyVIZrGB+OApaXDm7ByUDzNtcQ05iNHe+/ovVNQ6wJw1tf3Ean0nB+S57n+yrhn7IJub4HTWskmsYImsgAZ9uAVZgfNn5J6NBzGJiDoSHfz0+9Fm6k2l3Ai92OTOoNtddiMqVwJiOmDp5cDsdLf0S2vG5eH+pQfu/B3cKeqkoDJQ8dyThpl1X5S4SdfnAI/UGVF1SG6jRiLMf1qQhnoprBjGBUJ+zHXbW4TKgyUX6yduxKH9h4W2s5F0a62J+cO2QC99OGw1FQN0XcmskC4hT+icBylJHbo886pnXk9NUgzGce3e0BUOwL02aDbb9Bc32twDeqpsXL32DG2P/7CwdVlGZ3UILcwDAWpfJV8Mt8=
+  secret_access_key: &70309768835860
+    secure: oFQjdDqbMViea6b6yoPILnYTtD5b8c7bdWanj4n5dBGDAoTGLXdY0Uf10sxCr5CpIjCWVAjBeRZqy9mMdHWCMhV2qTmTpImIPEkKdNUcwlvGqZDXD9RG529c2eY2Dz5KupE7f0TCwfE++B62xb5ZCz7KcNZ+KZDaIwI0rgbCEWX2yDSfL7x3LuK49gbryN+ilNu1CUsaygWLN8Xu9cEpvCFaz+coZX6x6aHsulC9bOa7ND63dGvVkKC7jzPPipMV+I5Z9EZXHcm+lTsmmYlvHCsQt720YkmUGUC64HX54GlHXxSIc/aHCARIS66OZhFpHgjxySBt1ERNLMQpLGBG6MocN76F1lvLHTePHOamDScAm7xrNnWg2nke3oWFweFTQWX82iC3tDDC3SMHwC+manTcwSLq5EHQkToLi0G1bmqFNeCmHNueEt/PDWlzrqPGQV3kb3y1JDb5It7Kj79UxA7l2846tRIHN3L3KGMnoS6ws75HqTFZptG3iHe+QnxMHBAXdw995HRyYYjXy+gDj+I4azFzcwOzXMA253dqwXU3kYSzWb8/dWbG3cjp707YPGGuTqzA1jq4j+y0/N1EVFb9qY/lbLFoT9npLBQiie6PmafEGQYt0G+Ng4dktIzbXt9cSckiYAq0u3Kq1XCMiyoUvjZufZOVSdk8uSTLA1Y=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &70309768855300
+    repo: jagatveer/CodeDeployGitHubDemo
+  bucket: ops-587
+  region: us-west-2
+  upload_dir: sample
+- provider: codedeploy
+  access_key_id: AKIAJ2W67PFHEGNE4U4A
+  secret_access_key: *70309768835860
   bucket: ops-587
   key: sample/CodeDeployGitHubDemo-Ops-587.zip
   bundle_type: zip
   application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
-  on:
-    repo: jagatveer/CodeDeployGitHubDemo
+  on: *70309768855300
+before_deploy:
+- mkdir -p dpl_cd_upload
+- mv CodeDeployGitHubDemo-Ops-587.zip dpl_cd_upload/CodeDeployGitHubDemo-Ops-587.zip
