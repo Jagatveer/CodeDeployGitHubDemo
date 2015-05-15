@@ -1,14 +1,22 @@
 deploy:
-  provider: s3
+- provider: s3
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key:
-    secure: L810IyU2Ibky3vLX0/rr1aAMNCI2SLsRfYPJWc7O2TVOUjhdrlH4VC7RMVX+Q4bkm+zByUHPWHA80Nd8dfT7mm1XCSXeVVAu1alQyr1baJi4AOB3gZ6pjqDYAsWQl1X2KXuJomH1kEh2BvJWsl90anooL/fUAHt+pfYYWwkaLsXmTZZjOJAtiSa2JugGABEs94bm0ltAP5N+qudbGCAl/iiXVfitqnAZL12ytz/f26UfTD0GPF/snCXHKK4wwbV5C0BYwH2rckK4t8335+1Ppfg0ZgBRHqlYtKUE3qaECcQ1XitbbxGrPEscbUY0N9Gt9rvdQ7C7Vrl9+UWdxDVLjtiEEwqir21YjUmClCJKVdAnmLYDBIZufwuQXo5PMPaxFr+tAw977zdWrHs/Wjj6p+Av2WHNJnD3YT5uV/RUVGLgo4H0NMWE3rdP3IaLQaKdlo8yginbDuiRs/Xp8TInoAoZpr06+56OIA2w34pBAIuY0rWIOgHIyvO69cIgUYrgDM+eUlzjIKUhJyOl528NyKULMgNhpfA4ry6xDzlj2aGcwbrn9Kv68aYRa2nE4nFJZpMGxGVEphfFZeHL5hnIosI9QVd2wLGpeN2m73K6WH/aiHGaY+RZqamYLxy0h6H0Xs0wBV8/CZq5jKv2TK6SFCaKwY2HVjM7DXD8GtNckYs=
+  secret_access_key: &70295889274340
+    secure: oJek+Q10VvYuNDb0LNFf42fP7HMQIctUFcU89ZxMNNFo6niC129N24tbyim6RYPYEEq1Rt+x5hrDfquEvUaRrU2hi0pCfsUdLmXPBcPOvxdUhZoNnfZ3HVDfEcHW8VEcSppSyrdhauSJKN0K8g0QRPvLeMBjn21fqTpuv4+Mg7mVh84QmrKUVQ92IcLhGwjQ5qCmRg+hIcbRwkkMGDr4HrgrN1dwqpcQQAiZb0hzUzVHPn15lviOVdr+REpNoRg4zWRfy1ohQUGOKeq0mByP72iEAp6GQj4Dib0/fPVecOep2dDfJJ8f9VNhas8NDQAo3ttQuxaSfiTHxrviJ6Tk2ytBJeOXsugnqEX6XPP/SPqYBtkKI6jKP5BRF6GIbWtYCFz0NyhKbBToFBBOoDlSpzvunZLHc7A6gq0X/bqovv6O+JoTu07AeLu8s0f58HHmh6elrdz+0ENelhHUHkPZS56WWlNKx2Z2BCdePcTMe/bF0e/leu1vibNFae0QlDbRSTA784ENc5Dkfa4qorPNRkEA6YxXxnuc9JOa8V6r0uTkfeDnWQlov4yQVta3HQn1abvSQ3jcG4aZai88mP567Ec47F3QCF969zfEnWfFQNKctFEzBNV9nN9YSJ6c8+sIWVBpeca6FU+XuUpaOYEovHPzm32J0V6DwmYMSk5ODg8=
+  local_dir: codedeploy
+  skip_cleanup: true
+  on: &70295889292480
+    repo: jagatveer/CodeDeployGitHubDemo
   bucket: ops-587
   endpoint: "s3-website-us-west-2.amazonaws.com"
   region: "us-west-2"
-  skip_cleanup: true
-  local-dir: codedeploy 
-  upload-dir: sample
-  acl: public_read_write
-  on:
-    repo: jagatveer/CodeDeployGitHubDemo
+  upload_dir: sample
+- provider: codedeploy
+  access_key_id: AKIAJ2W67PFHEGNE4U4A
+  secret_access_key: *70295889274340
+  bucket: ops-587
+  key: sample/CodeDeployGitHubDemo-Ops-587.zip
+  bundle_type: zip
+  application: CodeDeploy-Ops-587
+  deployment_group: CodeDeploy-Ops-587
+  on: *70295889292480
