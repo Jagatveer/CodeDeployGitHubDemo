@@ -15,6 +15,7 @@ deploy:
   access_key_id: AKIAJ2W67PFHEGNE4U4A
   secret_access_key: *70295889274340
   bucket: ops-587
+  region: "us-west-2"
   key: sample/CodeDeployGitHubDemo-Ops-587.zip
   bundle_type: zip
   application: CodeDeploy-Ops-587
