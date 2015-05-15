@@ -1,22 +1,23 @@
 deploy:
 - provider: s3
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: &70159852348700
-    secure: msh0d0XtnS5TrwjtGGLdupdjC6RsCuKpMzaGLLHkekcMVWieFOFWiOrQToYlaMwHaaSwFPgyMxG6wjZHkbTP7QQ8NUGzmGs/0sgI4yKWf4TZiZZJ2413KfODRkNMZMPYyvLIGNhQgzW1DZLXQMU+LO6B2y86A92NH+j961ZeK9ly8uiAPVIpr5PL4HPovPx5/6XN5G+3NFhmP7ksgosI88M3LZ5dEYsHV4VXdIJ5jnWjDcnRyrL6KtSwxluHLcTbqGH+6h080lzUNmi8IJlPz9m36IkWm4WuW3DU4aaUOJlnX5My/UtqEUgJkAbyYOho0kj0Yu99VIF476h+Cq5lRJjp+A0IbmC0f+t8Jjq3gbMBjb+ECUW7tddhqoBWshyzSWIMtF91oAdJ/C0gbMorCFLO3GN3bFEHxPSlc3lITsWH4ASWxzPT3+JGf+cb/IpCG0lbWdtKz/Rp9xWn9ZOxJgpIeTopCLc3+pefwLGD/0mQ8GR9DImQBCQS+3gt94ULKbz9dl+/Y6eZ4y/oUxrogkQoQJQ2tJNkNVPWkfoEYyHROzY68lWRhF6tbbfW4UQEeO8kf9gHWQth+5qjPYOR5aNOFlLbuUgPBvyeFkBdRZyEJbvt4f+ChLVkWSPLuJ/u6td2xbq9oIFpmsKsNbltpfPoybTkKPEaykDcpJMoDwk=
+  secret_access_key: &70114028490460
+    secure: HZ7lwR9Y11iVJ+Ggn5C5GTp1KTepzGns5n8cCCbQnqjBb3dq/wkkJd/D6rTQDXxYr1KU7CFFk3SuWNmmG+x3RWvNza4TW/5Hw33PSykPM/F60/YFv48D8fhP6c7+z6HBuTPn7rmckSiiod1AMfNJqN+EV0OHFxKFS0Atp8zvPvneKV4jwJt3EazBfb1ZC9Wrl/ypOaB0JhkPaUVd/iI+uwy+K6tdce6o5iJI+gMcbHZ62hH1xHdt6ZczRlygxeln7l2ygaHxleL6XVXeUJkVbADf8/0VUkLAYxpwFCvZM+bf65iLgyRn64REA0672KwYBqit6XwuvPF5Tc59A33CAT+68U82bE8ilO4zaOeP1PW8jokGM5A3RZk8AFJZ3316DAwaP5Y+duqXHI8EW3RlCq6r5GDW1ZOxJF+mwbC2jMuLlr4NL7RhxIopbK5aTpcMuyumqJkazo4bGqxmhAJqVvzhNJ0bVTejRtDZxYwGBNLhPWHY+E4EvTjCEZ5VrLOtk967B74Yt92Mc+Nu/4n7NmCJWraHLPlC4o9TMvV9V10O7Dwxb4C9vUEfIETsCJ01kuyi/xzFHtFtbUHcYJ7PPYI0C1wySQPYce1+c/rFUcwLrSxlD6LFzIdzsNTnQU/nFzUSZ5k/8YlfN1OCD0H6Ok7MfjPsMJneQqjYy4Wv5Ck=
   local_dir: dpl_cd_upload
   skip_cleanup: true
-  on: &70159856443620
+  on: &70114028497260
     repo: jagatveer/CodeDeployGitHubDemo
   bucket: ops-587
+  upload_dir: sample
 - provider: codedeploy
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: *70159852348700
+  secret_access_key: *70114028490460
   bucket: ops-587
-  key: sample
+  key: sample/CodeDeployGitHubDemo-Ops-587.zip
   bundle_type: zip
   application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
-  on: *70159856443620
+  on: *70114028497260
 before_deploy:
 - mkdir -p dpl_cd_upload
-- mv index.html dpl_cd_upload/sample
+- mv index.html dpl_cd_upload/SampleApp_Linux.zip
