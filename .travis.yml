@@ -7,8 +7,9 @@ deploy:
   skip_cleanup: true
   on: &70309768855300
     repo: jagatveer/CodeDeployGitHubDemo
-  bucket: ops-587
-  region: us-west-2
+  bucket: "ops-587"
+  region: "us-west-2"
+  endpoint: "s3-website-us-west-2.amazonaws.com"
   upload_dir: sample
 - provider: codedeploy
   access_key_id: AKIAJ2W67PFHEGNE4U4A
