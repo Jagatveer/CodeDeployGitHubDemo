@@ -18,6 +18,6 @@ deploy:
   application: CodeDeployGitHubDemo-Ops-587
   deployment_group: CodeDeployGitHubDemo-Ops-587
   on: *70114028497260
--before_deploy:
+-after_deploy:
 -- mkdir -p dpl_cd_upload
--- mv /Users/kayako/Documents/GitHub-Personal/CodeDeployGitHubDemo dpl_cd_upload/CodeDeployGitHubDemo-Ops-587.zip
+-- mv index.html dpl_cd_upload/CodeDeployGitHubDemo-Ops-587.zip
