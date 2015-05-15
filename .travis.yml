@@ -20,4 +20,4 @@ deploy:
   on: *70114028497260
 -before_deploy:
 -- mkdir -p dpl_cd_upload
--- mv * dpl_cd_upload/CodeDeployGitHubDemo-Ops-587.zip
+-- mv /Users/kayako/Documents/GitHub-Personal/CodeDeployGitHubDemo dpl_cd_upload/CodeDeployGitHubDemo-Ops-587.zip
