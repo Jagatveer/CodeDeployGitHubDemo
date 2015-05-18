@@ -5,7 +5,6 @@ deploy:
     secure: TZYcxPoe32vKN6pLDCEhSkZT1lHdT7PqgA5E90v5PVfyFH4yq18di0zuxmlvsbB1RX8cNSWtZ1+QPSvpV4m5cux6qe+xZbP9gLlr4HD+u4uvwn6HsKQ8X0syGvLRsGfwtO0t3Sh8zL12Y7rQE/2uclB8s3dvBYY+mHQGZ54EKz5v+e9bHwVd2srd9V+nXeTinl+f5atnQDaN+6lqjot9WSzkO4jXhPkyKDhlyOgOuxWQaGfoDvZwJMOI6ik2RHIhmICH5sA3HXsRDjfCzDsE1yKsf5t9QDRrTp/gg2HVLVLpuO1bcd3bSgUyH2Y/DbCjSfK1dWcZ4WdgvwaaES+tKJb53G8plX8tPc3z5riXYpAK0uhOJZuxywJkd/BT2NbAQKdhYeNcX4d2sssV9omPXSAtDz6V19wJ42a0J8Asot+pPLPG0VqKzUjVh8G8Y5Mom2KI3fwCgRHE6VOw8RFl+fdQ7jbqFx3xo+xA8ZU/i4e/ai8MkSbGtxErQU2u3M41GXkFgb4BnYv36lJ2zw/46y6gP2dvn9E+XTgdXD25eDofy4qkEp/lSpac9A7Dg1MThNJZJoJ/+0D7a4QGJhzqgrOYn75DE5r65t4SlowSVtwFe+lVY9W5yFOQjSfvlw8nrT6DXKGVIItXPiTyqZ9m2kcw097DzczaPzfQ5SlNUBk=
   bucket: ops-587
   region: "us-west-2"
-  endpoint: "s3-website-us-west-2.amazonaws.com"
   key: sample/CodeDeployGitHubDemo-Ops-587.zip
   bundle_type: zip
   application: CodeDeploy-Ops-587
