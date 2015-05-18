@@ -1,22 +1,14 @@
 deploy:
-- provider: s3
+  provider: codedeploy
   access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: &70295889274340
-    secure: oJek+Q10VvYuNDb0LNFf42fP7HMQIctUFcU89ZxMNNFo6niC129N24tbyim6RYPYEEq1Rt+x5hrDfquEvUaRrU2hi0pCfsUdLmXPBcPOvxdUhZoNnfZ3HVDfEcHW8VEcSppSyrdhauSJKN0K8g0QRPvLeMBjn21fqTpuv4+Mg7mVh84QmrKUVQ92IcLhGwjQ5qCmRg+hIcbRwkkMGDr4HrgrN1dwqpcQQAiZb0hzUzVHPn15lviOVdr+REpNoRg4zWRfy1ohQUGOKeq0mByP72iEAp6GQj4Dib0/fPVecOep2dDfJJ8f9VNhas8NDQAo3ttQuxaSfiTHxrviJ6Tk2ytBJeOXsugnqEX6XPP/SPqYBtkKI6jKP5BRF6GIbWtYCFz0NyhKbBToFBBOoDlSpzvunZLHc7A6gq0X/bqovv6O+JoTu07AeLu8s0f58HHmh6elrdz+0ENelhHUHkPZS56WWlNKx2Z2BCdePcTMe/bF0e/leu1vibNFae0QlDbRSTA784ENc5Dkfa4qorPNRkEA6YxXxnuc9JOa8V6r0uTkfeDnWQlov4yQVta3HQn1abvSQ3jcG4aZai88mP567Ec47F3QCF969zfEnWfFQNKctFEzBNV9nN9YSJ6c8+sIWVBpeca6FU+XuUpaOYEovHPzm32J0V6DwmYMSk5ODg8=
-  skip_cleanup: true
-  on: &70295889292480
-    repo: jagatveer/CodeDeployGitHubDemo
+  secret_access_key:
+    secure: TZYcxPoe32vKN6pLDCEhSkZT1lHdT7PqgA5E90v5PVfyFH4yq18di0zuxmlvsbB1RX8cNSWtZ1+QPSvpV4m5cux6qe+xZbP9gLlr4HD+u4uvwn6HsKQ8X0syGvLRsGfwtO0t3Sh8zL12Y7rQE/2uclB8s3dvBYY+mHQGZ54EKz5v+e9bHwVd2srd9V+nXeTinl+f5atnQDaN+6lqjot9WSzkO4jXhPkyKDhlyOgOuxWQaGfoDvZwJMOI6ik2RHIhmICH5sA3HXsRDjfCzDsE1yKsf5t9QDRrTp/gg2HVLVLpuO1bcd3bSgUyH2Y/DbCjSfK1dWcZ4WdgvwaaES+tKJb53G8plX8tPc3z5riXYpAK0uhOJZuxywJkd/BT2NbAQKdhYeNcX4d2sssV9omPXSAtDz6V19wJ42a0J8Asot+pPLPG0VqKzUjVh8G8Y5Mom2KI3fwCgRHE6VOw8RFl+fdQ7jbqFx3xo+xA8ZU/i4e/ai8MkSbGtxErQU2u3M41GXkFgb4BnYv36lJ2zw/46y6gP2dvn9E+XTgdXD25eDofy4qkEp/lSpac9A7Dg1MThNJZJoJ/+0D7a4QGJhzqgrOYn75DE5r65t4SlowSVtwFe+lVY9W5yFOQjSfvlw8nrT6DXKGVIItXPiTyqZ9m2kcw097DzczaPzfQ5SlNUBk=
   bucket: ops-587
+  region: "us-west-2"
   endpoint: "s3-website-us-west-2.amazonaws.com"
-  region: "us-west-2"
-  upload_dir: sample
-- provider: codedeploy
-  access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key: *70295889274340
-  bucket: ops-587
-  region: "us-west-2"
   key: sample/CodeDeployGitHubDemo-Ops-587.zip
   bundle_type: zip
   application: CodeDeploy-Ops-587
   deployment_group: CodeDeploy-Ops-587
-  on: *70295889292480
+  on:
+    repo: jagatveer/CodeDeployGitHubDemo
