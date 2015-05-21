@@ -1,13 +1,23 @@
 deploy:
-  provider: codedeploy
-  access_key_id: AKIAJ2W67PFHEGNE4U4A
-  secret_access_key:
-    secure: TZYcxPoe32vKN6pLDCEhSkZT1lHdT7PqgA5E90v5PVfyFH4yq18di0zuxmlvsbB1RX8cNSWtZ1+QPSvpV4m5cux6qe+xZbP9gLlr4HD+u4uvwn6HsKQ8X0syGvLRsGfwtO0t3Sh8zL12Y7rQE/2uclB8s3dvBYY+mHQGZ54EKz5v+e9bHwVd2srd9V+nXeTinl+f5atnQDaN+6lqjot9WSzkO4jXhPkyKDhlyOgOuxWQaGfoDvZwJMOI6ik2RHIhmICH5sA3HXsRDjfCzDsE1yKsf5t9QDRrTp/gg2HVLVLpuO1bcd3bSgUyH2Y/DbCjSfK1dWcZ4WdgvwaaES+tKJb53G8plX8tPc3z5riXYpAK0uhOJZuxywJkd/BT2NbAQKdhYeNcX4d2sssV9omPXSAtDz6V19wJ42a0J8Asot+pPLPG0VqKzUjVh8G8Y5Mom2KI3fwCgRHE6VOw8RFl+fdQ7jbqFx3xo+xA8ZU/i4e/ai8MkSbGtxErQU2u3M41GXkFgb4BnYv36lJ2zw/46y6gP2dvn9E+XTgdXD25eDofy4qkEp/lSpac9A7Dg1MThNJZJoJ/+0D7a4QGJhzqgrOYn75DE5r65t4SlowSVtwFe+lVY9W5yFOQjSfvlw8nrT6DXKGVIItXPiTyqZ9m2kcw097DzczaPzfQ5SlNUBk=
-  bucket: ops-587
-  region: "us-west-2"
-  key: sample/CodeDeployGitHubDemo-Ops-587.zip
-  bundle_type: zip
-  application: CodeDeploy-Ops-587
-  deployment_group: CodeDeploy-Ops-587
-  on:
+- provider: s3
+  access_key_id: AKIAJIACEZZVRIM5J63Q
+  secret_access_key: &70203069521860
+    secure: oufXpdcFhpGnfOA9SqF+da25vFc6nkGkKsCTz6qnrMbzR5nJ4S6mFdHf2iGORnp/c44BIelSrisDriFwbwJCH3QADYQ6ziZ5cztrwnxpO9YHGiHN4RjYPzO3TQI72UFh51Qw95dZWK88yvmLNOA9MIW8Z/DJAfVWCy/5tbEgW3TGhes96MSyjnNESBuFuCtVPQ1kTDhOpJOQ2C73rPNIn95JtfisX4MNTBCC5tuc3WL6z4AMmpT8WnZAzSY6wIA8c8m+WjRNaYIWwHlAz5fxRxRzYIeLPL4C3O9o2F77Gw4ep6yieBSexQF2v6KPcq3ohYZ+ERSov1vvpCkjKzBPN1TBzV9UWobejok/QVCcl/2eCqBEmbFk1fqGYwVlWPXQW3Pcadv5UvBptxVf/tb9TShmwInjUbSftrELJ9mesxuRSt4FM6Yt4tWH3+3jN9AR4FGaBfwR2qYxm6oruvVfTLeFTio9TaEP47vufZ2Qxye6/sSFLvHONWmJTPmmTWKM2VT/1Hwt/s+9IAzZs7tDNA9e7slh04tTWeLsIRRN3x7CwVuAUUKTWge/R8qapYCqeFZobU67hlUyC4MJU5+SaopRqKwSPFIA3Mq5qX+ltlZegHOL/9vBQFhX26y0lvOQmFf9sEl7Y9fFOQ88oVJ6tls/D+JpX6PTL5T11fTzTUQ=
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &70203057526140
     repo: jagatveer/CodeDeployGitHubDemo
+  bucket: ops-587
+  upload_dir: sample
+- provider: codedeploy
+  access_key_id: AKIAJIACEZZVRIM5J63Q
+  secret_access_key: *70203069521860
+  bucket: ops-587
+  key: sample/githubtest.tar.gz
+  bundle_type: tgz
+  application: OPS-587
+  deployment_group: OPS-587
+  on: *70203057526140
+before_deploy:
+- mkdir -p dpl_cd_upload
+- mv githubtest.tar.gz dpl_cd_upload/githubtest.tar.gz
